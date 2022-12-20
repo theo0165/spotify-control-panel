@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { createGlobalStyle, ThemeConsumer, ThemeProvider } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import reportWebVitals from './reportWebVitals';

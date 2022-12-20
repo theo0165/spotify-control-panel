@@ -20,7 +20,8 @@
     "concurrently": "^7.6.0",
     "env-cmd": "^10.1.0",
     "nodemon": "^2.0.20",
-    "prettier": "^2.8.1"
+    "prettier": "^2.8.1",
+    "prettier-plugin-organize-imports": "^3.2.1"
   },
   "workspaces": [
     "apps/**",
