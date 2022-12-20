@@ -17,7 +17,8 @@
     "web-vitals": "^2.1.4",
     "@scp/types": "*",
     "@scp/eslint-config-config-scp": "*",
-    "@scp/tsconfig": "*"
+    "@scp/tsconfig": "*",
+    "@scp/utils": "*"
   },
   "scripts": {
     "start": "react-scripts start",

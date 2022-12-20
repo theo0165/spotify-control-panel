@@ -1,0 +1,21 @@
+{
+  "name": "@scp/utils",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc --watch",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@scp/types": "*",
+    "@scp/tsconfig": "*",
+    "@scp/eslint-config-config-scp": "*",
+    "typescript": "^4.9.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.17"
+  }
+}

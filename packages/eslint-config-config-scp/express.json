@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/eslintrc",
   "extends": ["./base.json"],
   "rules": {
-    "no-console": "off"
+    "no-console": "off",
+    "import/prefer-default-export": "off"
   }
 }

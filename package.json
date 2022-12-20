@@ -10,7 +10,9 @@
     "backend:lint": "yarn workspace @scp/backend lint",
     "frontend:start": "env-cmd -f .env yarn workspace @scp/frontend start",
     "frontend:lint": "yarn workspace @scp/frontend start",
-    "start": "concurrently \"yarn backend:start\" \"yarn frontend:start\"",
+    "utils:start": "env-cmd -f .env yarn workspace @scp/utils start",
+    "utils:lint": "yarn workspace @scp/utils lint",
+    "start": "concurrently \"yarn utils:start\" \"yarn backend:start\" \"yarn frontend:start\"",
     "lint": "yarn frontend:lint && yarn backend:lint"
   },
   "dependencies": {},

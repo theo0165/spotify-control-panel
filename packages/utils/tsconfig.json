@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "extends": "@scp/tsconfig/lib.json",
+  "include": ["index*.ts", "./src/**/*.ts"]
+}

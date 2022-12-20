@@ -12,6 +12,7 @@
     "@scp/eslint-config-config-scp": "*",
     "@scp/tsconfig": "*",
     "@scp/types": "*",
+    "@scp/utils": "*",
     "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
     "ts-node": "^10.9.1",
