@@ -1,0 +1,4 @@
+{
+  "extends": "@scp/tsconfig/react.json",
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
+}

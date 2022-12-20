@@ -1,0 +1,9 @@
+{
+  "name": "@scp/types",
+  "version": "0.0.1",
+  "main": "index.d.ts",
+  "private": true,
+  "dependencies": {
+    "@types/express-serve-static-core": "^4.17.31"
+  }
+}

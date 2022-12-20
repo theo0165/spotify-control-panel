@@ -1,0 +1,27 @@
+{
+  "name": "spotify-control-panel",
+  "version": "0.0.1",
+  "repository": "https://github.com/theo0165/spotify-control-panel",
+  "author": "Theo Sandell <theo01sandell@gmail.com>",
+  "license": "MIT",
+  "private": "true",
+  "scripts": {
+    "backend:start": "env-cmd -f .env yarn workspace @scp/backend start",
+    "backend:lint": "yarn workspace @scp/backend lint",
+    "frontend:start": "env-cmd -f .env yarn workspace @scp/frontend start",
+    "frontend:lint": "yarn workspace @scp/frontend start",
+    "start": "concurrently \"yarn backend:start\" \"yarn frontend:start\"",
+    "lint": "yarn frontend:lint && yarn backend:lint"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "env-cmd": "^10.1.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.1"
+  },
+  "workspaces": [
+    "apps/**",
+    "packages/**"
+  ]
+}

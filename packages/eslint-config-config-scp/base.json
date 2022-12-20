@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/eslintrc",
+  "ignorePatterns": ["**/node_modules/**", ".eslintrc.js"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb",
+    "airbnb-typescript"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "object-curly-newline": "off",
+    "no-param-reassign": "off",
+    "no-alert": "error",
+    "no-restricted-exports": "off"
+  }
+}
