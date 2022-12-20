@@ -1,12 +1,36 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 import reportWebVitals from './reportWebVitals';
+import theme from './theme';
+
+const GlobalStyles = createGlobalStyle`
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1em;
+  }
+`;
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />,
+    errorElement: <NotFound />,
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </StrictMode>,
 );
 
