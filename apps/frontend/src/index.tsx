@@ -1,11 +1,11 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { createGlobalStyle, ThemeConsumer, ThemeProvider } from 'styled-components';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import reportWebVitals from './reportWebVitals';
-import theme from './theme';
+import appTheme from './theme';
 
 const GlobalStyles = createGlobalStyle`
   *{
@@ -13,6 +13,17 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     line-height: 1em;
+  }
+
+  body {
+    font-family: sans-serif;
+    background-color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white};
+  }
+
+  ::selection{
+    background: ${({ theme }) => theme.colors.green};
+    color: ${({ theme }) => theme.colors.white};
   }
 `;
 
@@ -27,7 +38,7 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={appTheme}>
       <GlobalStyles />
       <RouterProvider router={router} />
     </ThemeProvider>
