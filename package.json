@@ -13,7 +13,8 @@
     "utils:start": "env-cmd -f .env yarn workspace @scp/utils start",
     "utils:lint": "yarn workspace @scp/utils lint",
     "start": "concurrently \"yarn utils:start\" \"yarn backend:start\" \"yarn frontend:start\"",
-    "lint": "yarn frontend:lint && yarn backend:lint"
+    "lint": "yarn frontend:lint && yarn backend:lint",
+    "migrate": "env-cmd -f .env yarn workspace @scp/backend migrate"
   },
   "dependencies": {},
   "devDependencies": {
