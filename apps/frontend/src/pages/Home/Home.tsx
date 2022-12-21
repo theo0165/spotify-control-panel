@@ -1,18 +1,13 @@
-import { urlBuilder } from '@scp/utils';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
+import TextStyles from '../../components/TextStyles';
+import useMe from '../../hooks/useMe';
+import useProtectedRoute from '../../hooks/useProtectedRoute';
 
 const HomePage: FC = () => {
-  const [data, setData] = useState<object | null>(null);
+  const [me] = useMe();
+  useProtectedRoute();
 
-  useEffect(() => {
-    (async () => {
-      const request = await fetch(urlBuilder('/'));
-
-      setData(await request.json());
-    })();
-  }, []);
-
-  return <>{JSON.stringify(data)}</>;
+  return <TextStyles as="h1">{`Hello ${me?.name}`}</TextStyles>;
 };
 
 export default HomePage;

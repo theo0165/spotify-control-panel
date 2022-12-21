@@ -1,30 +1,43 @@
+import { User } from '@scp/types';
 import { fetchWithCredentials, urlBuilder } from '@scp/utils';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { setUser } from '../store/slices/userSlice';
 import { useAppDispatch } from './useAppDispatch';
 import { useAppSelector } from './useAppSelector';
 
-const useMe = () => {
+const useMe = (): [User | null, boolean] => {
   const dispatch = useAppDispatch();
   const { user, isLoggedIn } = useAppSelector(state => state.user);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!!user || isLoggedIn) return;
+    setIsLoading(true);
+    if (!!user || isLoggedIn) {
+      setIsLoading(false);
+      return;
+    }
 
     (async () => {
       const userRequest = await fetchWithCredentials(urlBuilder('/user/me'));
 
-      if (!userRequest.ok) return;
+      if (!userRequest.ok) {
+        setIsLoading(false);
+        return;
+      }
 
       const userData = await userRequest.json();
 
-      if (!userData || userData.error) return;
+      if (!userData || userData.error) {
+        setIsLoading(false);
+        return;
+      }
 
       dispatch(setUser(userData));
+      setIsLoading(false);
     })();
   }, []);
 
-  return user;
+  return [user, isLoading];
 };
 
 export default useMe;

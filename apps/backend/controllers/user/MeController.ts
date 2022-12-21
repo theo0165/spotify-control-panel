@@ -5,9 +5,7 @@ const MeController: Controller = (req, res) => {
     return res.json(req.session.user);
   }
 
-  console.log(req.session);
-
-  return res.json({ what: 'happend' });
+  return res.status(401).json({ error: 'No user' });
 };
 
 export default MeController;
