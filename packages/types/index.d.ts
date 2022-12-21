@@ -4,6 +4,7 @@ export {};
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
+      APP_URL: string;
       SERVER_PORT?: string;
       DATABASE_URL: string;
       SESSION_SECRET: string;
