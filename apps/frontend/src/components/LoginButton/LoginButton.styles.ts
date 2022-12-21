@@ -14,6 +14,6 @@ export const Wrapper = styled.button`
   column-gap: 8px;
 
   &:active {
-    margin-top: 1px;
+    transform: translateY(0.5px);
   }
 `;
