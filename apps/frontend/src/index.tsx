@@ -15,6 +15,11 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
   body {
     font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
     background-color: ${({ theme }) => theme.colors.black};

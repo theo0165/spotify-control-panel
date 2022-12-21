@@ -1,3 +1,4 @@
+import { urlBuilder } from '@scp/utils';
 import { FC } from 'react';
 import LoginButton from '../../components/LoginButton';
 import TextStyles from '../../components/TextStyles';
@@ -8,7 +9,9 @@ const LoginPage: FC = () => (
     <TextStyles as="h1" fontWeight="light">
       Controller for Spotify
     </TextStyles>
-    <LoginButton />
+    <a href={urlBuilder('/auth/login')}>
+      <LoginButton />
+    </a>
   </S.Wrapper>
 );
 
