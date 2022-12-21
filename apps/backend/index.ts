@@ -1,5 +1,6 @@
 import connectRedis from 'connect-redis';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import express from 'express';
 import session from 'express-session';
 import IORedis from 'ioredis';
@@ -12,6 +13,7 @@ const redisClient = new IORedis({
   port: parseInt(process.env.REDIS_PORT, 10),
 });
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

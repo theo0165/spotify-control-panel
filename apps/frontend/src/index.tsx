@@ -2,7 +2,8 @@ import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import Home from './pages/Home';
+import HomePage from './pages/Home';
+import LoginPage from './pages/Login/Login';
 import NotFound from './pages/NotFound';
 import reportWebVitals from './reportWebVitals';
 import appTheme from './theme';
@@ -30,8 +31,12 @@ const GlobalStyles = createGlobalStyle`
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />,
+    element: <HomePage />,
     errorElement: <NotFound />,
+  },
+  {
+    path: '/login',
+    element: <LoginPage />,
   },
 ]);
 

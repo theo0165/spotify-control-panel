@@ -9,6 +9,7 @@ declare global {
       SESSION_SECRET: string;
       SESSION_COOKIE_NAME: string;
       REDIS_PORT: string;
+      REACT_APP_SERVER_BASE_URL: string;
     }
   }
 }
