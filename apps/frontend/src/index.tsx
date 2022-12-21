@@ -17,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-family: sans-serif;
+    font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
     background-color: ${({ theme }) => theme.colors.black};
     color: ${({ theme }) => theme.colors.white};
   }
