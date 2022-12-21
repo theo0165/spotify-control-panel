@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User, UserState } from '@scp/types';
+import { Playlist, User, UserState } from '@scp/types';
 
 const initialState: UserState = {
   isLoggedIn: false,
   user: null,
+  playlists: [],
 };
 
 export const userSlice = createSlice({
@@ -17,9 +18,12 @@ export const userSlice = createSlice({
     setIsLoggedIn: (state, action: PayloadAction<boolean>) => {
       state.isLoggedIn = action.payload;
     },
+    setPlaylists: (state, action: PayloadAction<Playlist[]>) => {
+      state.playlists = action.payload;
+    },
   },
 });
 
-export const { setUser, setIsLoggedIn } = userSlice.actions;
+export const { setUser, setIsLoggedIn, setPlaylists } = userSlice.actions;
 
 export default userSlice.reducer;
