@@ -6,8 +6,6 @@ const HomePage: FC = () => {
 
   useEffect(() => {
     (async () => {
-      console.log(urlBuilder('/'));
-
       const request = await fetch(urlBuilder('/'));
 
       setData(await request.json());
