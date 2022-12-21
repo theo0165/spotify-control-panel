@@ -5,7 +5,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "CommonJS",
-    "lib": ["ESNext"],
+    "lib": ["ESNext", "DOM"],
     "sourceMap": true
   },
   "include": ["src/**/*.ts"]

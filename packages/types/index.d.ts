@@ -1,4 +1,8 @@
+import { SpotifyToken } from './server';
+import { User } from './Spotify';
+
 export * from './server';
+export * from './Spotify';
 export {};
 
 declare global {
@@ -10,7 +14,18 @@ declare global {
       SESSION_SECRET: string;
       SESSION_COOKIE_NAME: string;
       REDIS_PORT: string;
+      SPOTIFY_CLIENT_ID: string;
+      SPOTIFY_CLIENT_SECRET: string;
+      SPOTIFY_REDIRECT_URI: string;
       REACT_APP_SERVER_BASE_URL: string;
     }
+  }
+}
+
+declare module 'express-session' {
+  interface SessionData {
+    state?: string;
+    token?: SpotifyToken;
+    user?: User;
   }
 }

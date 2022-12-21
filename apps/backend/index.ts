@@ -3,15 +3,12 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
 import session from 'express-session';
-import IORedis from 'ioredis';
+import RedisClient from './lib/RedisClient';
 import router from './src/routes';
 
 const PORT = process.env.SERVER_PORT ?? 3001;
 const app = express();
 const StoreRedis = connectRedis(session);
-const redisClient = new IORedis({
-  port: parseInt(process.env.REDIS_PORT, 10),
-});
 
 app.use(cors());
 app.use(express.json());
@@ -23,7 +20,8 @@ app.use(
     name: process.env.SESSION_COOKIE_NAME,
     secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
-    store: new StoreRedis({ client: redisClient }),
+    resave: false,
+    store: new StoreRedis({ client: RedisClient }),
   }),
 );
 

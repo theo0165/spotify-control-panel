@@ -10,12 +10,14 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@scp/types": "*",
-    "@scp/tsconfig": "*",
     "@scp/eslint-config-config-scp": "*",
+    "@scp/tsconfig": "*",
+    "@scp/types": "*",
+    "express": "^4.18.2",
     "typescript": "^4.9.4"
   },
   "devDependencies": {
+    "@types/express": "^4.17.15",
     "@types/node": "^18.11.17"
   }
 }

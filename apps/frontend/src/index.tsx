@@ -15,15 +15,24 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  a {
-    color: inherit;
-    text-decoration: none;
+  html, body{
+    width: 100vw;
+    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
   }
 
   body {
     font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
     background-color: ${({ theme }) => theme.colors.black};
     color: ${({ theme }) => theme.colors.white};
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 
   ::selection{
