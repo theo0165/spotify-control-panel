@@ -4,13 +4,18 @@ import cors from 'cors';
 import express from 'express';
 import session from 'express-session';
 import RedisClient from './lib/RedisClient';
-import router from './src/routes';
+import router from './routes';
 
 const PORT = process.env.SERVER_PORT ?? 3001;
 const app = express();
 const StoreRedis = connectRedis(session);
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [...process.env.CORS_ALLOW.split(',')],
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

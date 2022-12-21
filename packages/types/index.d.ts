@@ -3,6 +3,7 @@ import { User } from './Spotify';
 
 export * from './server';
 export * from './Spotify';
+export * from './states';
 export {};
 
 declare global {
@@ -18,6 +19,7 @@ declare global {
       SPOTIFY_CLIENT_SECRET: string;
       SPOTIFY_REDIRECT_URI: string;
       REACT_APP_SERVER_BASE_URL: string;
+      CORS_ALLOW: string;
     }
   }
 }

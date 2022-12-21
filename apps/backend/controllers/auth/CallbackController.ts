@@ -53,6 +53,8 @@ const CallbackController: Controller = async (req, res) => {
     expires: Date.now() + expiresIn * 1000,
   };
 
+  req.session.save();
+
   let user: ApiUser | null = null;
   let tries = 0;
 
@@ -82,6 +84,10 @@ const CallbackController: Controller = async (req, res) => {
     email: user.email,
     id: user.id,
   };
+
+  req.session.save();
+
+  console.log(req.session);
 
   return res.redirect(process.env.APP_URL);
 };

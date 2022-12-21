@@ -32,6 +32,7 @@ export const refreshToken = async (req: Request, token: SpotifyToken): Promise<b
     accessToken,
     expires: Date.now() + expiresIn * 1000,
   };
+  req.session.save();
 
   return true;
 };

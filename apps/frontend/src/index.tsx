@@ -1,11 +1,14 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import Bootstrap from './components/Bootstrap';
 import HomePage from './pages/Home';
 import LoginPage from './pages/Login/Login';
 import NotFound from './pages/NotFound';
 import reportWebVitals from './reportWebVitals';
+import { store } from './store';
 import appTheme from './theme';
 
 const GlobalStyles = createGlobalStyle`
@@ -56,10 +59,13 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <StrictMode>
-    <ThemeProvider theme={appTheme}>
-      <GlobalStyles />
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={appTheme}>
+        <Bootstrap />
+        <GlobalStyles />
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </Provider>
   </StrictMode>,
 );
 

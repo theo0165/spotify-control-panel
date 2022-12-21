@@ -14,6 +14,7 @@
     "no-param-reassign": "off",
     "no-alert": "error",
     "no-restricted-exports": "off",
-    "no-await-in-loop": "off"
+    "no-await-in-loop": "off",
+    "arrow-parens": "off"
   }
 }

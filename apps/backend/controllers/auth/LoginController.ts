@@ -17,6 +17,7 @@ const LoginController: Controller = (req, res) => {
   ].join(' ');
 
   req.session.state = state;
+  req.session.save();
 
   const params = new URLSearchParams({
     response_type: 'code',
