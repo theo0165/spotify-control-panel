@@ -4,7 +4,7 @@ import * as S from './Playlist.styles';
 import { PlaylistProps } from './Playlist.types';
 
 const Playlist: FC<PlaylistProps> = ({ data, isSelected }) => {
-  const { name, image, tracks, owner } = data;
+  const { name, image, owner } = data;
 
   return (
     <S.Wrapper isSelected={isSelected}>

@@ -68,8 +68,6 @@ const CallbackController: Controller = async (req, res) => {
 
   req.session.save();
 
-  console.log(req.session);
-
   return res.redirect(process.env.APP_URL);
 };
 

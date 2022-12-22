@@ -16,8 +16,6 @@ const useApplication = () => {
 
       const appData = await appDataRequest.json();
 
-      console.log({ appData });
-
       dispatch(resolveApplication(appData));
     })();
   }, []);
