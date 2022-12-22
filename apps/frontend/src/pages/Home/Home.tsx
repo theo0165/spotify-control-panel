@@ -1,27 +1,21 @@
 import { FC } from 'react';
-import TextStyles from '../../components/TextStyles';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import useMe from '../../hooks/useMe';
 import usePlaylists from '../../hooks/usePlaylists';
 import useProtectedRoute from '../../hooks/useProtectedRoute';
+import FrontPage from '../../modules/FrontPage';
+import Player from '../../modules/Player';
 
 const HomePage: FC = () => {
+  const currentModule = useAppSelector(state => state.application.currentModule);
   const [me] = useMe();
   const [playlists] = usePlaylists();
   useProtectedRoute();
 
   return (
     <>
-      <TextStyles as="h1">{`Hello ${me?.name}`}</TextStyles>
-      {playlists.map(playlist => (
-        <div>
-          <img
-            src={playlist.image || 'https://via.placeholder.com/300'}
-            width="300px"
-            height="300px"
-          />
-          <p>{playlist.name}</p>
-        </div>
-      ))}
+      <FrontPage />
+      <Player isActive={currentModule === 'player'} />
     </>
   );
 };
