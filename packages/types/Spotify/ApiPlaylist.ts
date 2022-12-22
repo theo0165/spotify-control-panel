@@ -7,4 +7,7 @@ export interface ApiPlaylist {
   tracks: {
     total: number;
   };
+  owner: {
+    display_name: string | null;
+  };
 }

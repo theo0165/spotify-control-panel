@@ -5,7 +5,7 @@ export const Wrapper = styled.div<WrapperProps>`
   background-color: red;
   height: 100vh;
   width: 100vw;
-  position: absolute;
+  position: fixed;
   top: 0;
   transform: translateY(100vh);
   transition: transform ${({ theme }) => theme.transitions.fast};

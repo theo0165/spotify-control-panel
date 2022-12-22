@@ -7,12 +7,12 @@ import { useAppSelector } from './useAppSelector';
 
 const usePlaylists = (): [Playlist[], boolean] => {
   const dispatch = useAppDispatch();
-  const { playlists } = useAppSelector(state => state.user);
+  const playlists = useAppSelector(state => state.user.playlists);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
-    if (!playlists) {
+    if (playlists.length > 0) {
       setIsLoading(false);
       return;
     }

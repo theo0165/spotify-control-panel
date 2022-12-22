@@ -3,4 +3,5 @@ export interface Playlist {
   name: string;
   image: string | null;
   tracks: number;
+  owner: string | null;
 }

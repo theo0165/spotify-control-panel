@@ -19,6 +19,7 @@ const PlaylistController: Controller = async (req, res) => {
       name: playlist.name,
       image: playlist.images.slice(0, 1).map(image => image.url)[0] ?? null,
       tracks: playlist.tracks.total,
+      owner: playlist.owner.display_name,
     })),
   );
 };
