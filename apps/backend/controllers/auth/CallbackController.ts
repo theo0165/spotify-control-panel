@@ -1,5 +1,5 @@
 import { ApiUser, Controller } from '@scp/types';
-import { getAuthToken, getMe, refreshToken as getNewRefreshToken } from '@scp/utils';
+import { getAuthToken, getSpofityData, isError } from '@scp/utils';
 
 const CallbackController: Controller = async (req, res) => {
   const { code, state } = req.query;
@@ -55,29 +55,10 @@ const CallbackController: Controller = async (req, res) => {
 
   req.session.save();
 
-  let user: ApiUser | null = null;
-  let tries = 0;
-
-  while (true) {
-    if (tries > 4) break;
-
-    const me = await getMe(req.session.token);
-
-    if (!me) {
-      const refresh = await getNewRefreshToken(req, req.session.token);
-
-      if (!refresh) {
-        return res.status(500).json({ error: 'Could not refresh token' });
-      }
-    } else {
-      user = me;
-      break;
-    }
-
-    tries += 1;
-  }
+  const user = await getSpofityData<ApiUser>('/me', req);
 
   if (!user) return res.json({ error: 'Something went wrong' });
+  if (isError(user)) return res.json({ error: user.error });
 
   req.session.user = {
     name: user.display_name,

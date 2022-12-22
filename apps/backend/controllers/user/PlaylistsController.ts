@@ -1,5 +1,5 @@
 import { ApiPlaylist, Controller } from '@scp/types';
-import { getPlaylists, refreshToken } from '@scp/utils';
+import { getSpofityData, isError } from '@scp/utils';
 
 const PlaylistController: Controller = async (req, res) => {
   if (!req.session.user) return res.status(401).json({ error: 'No user' });
@@ -8,32 +8,13 @@ const PlaylistController: Controller = async (req, res) => {
     return res.json(req.session.playlists);
   }
 
-  let playlists: ApiPlaylist[] = [];
-  let tries = 0;
-
-  while (true) {
-    if (tries > 4) break;
-
-    const data = await getPlaylists(req.session.token);
-
-    if (!data) {
-      const refresh = await refreshToken(req, req.session.token);
-
-      if (!refresh) {
-        return res.status(500).json({ error: 'Could not refresh token' });
-      }
-    } else {
-      playlists = data;
-      break;
-    }
-
-    tries += 1;
-  }
+  const playlists = await getSpofityData<{ items: ApiPlaylist[] }>('/me/playlists', req);
 
   if (!playlists) return res.json({ error: 'Something went wrong' });
+  if (isError(playlists)) return res.json({ error: playlists.error });
 
   return res.json(
-    playlists.map(playlist => ({
+    playlists.items.map(playlist => ({
       id: playlist.id,
       name: playlist.name,
       image: playlist.images.slice(0, 1).map(image => image.url)[0] ?? null,
