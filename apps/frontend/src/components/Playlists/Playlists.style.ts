@@ -16,22 +16,13 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const DeviceMenu = styled.div<DeviceMenuProps>`
+export const DeviceMenu = styled.div`
   width: 200px;
   min-width: 200px;
   max-width: 200px;
-
-  ${({ isSelected }) =>
-    isSelected &&
-    css`
-      > div {
-        border: 3px solid ${({ theme }) => theme.colors.green};
-        border-radius: ${({ theme }) => theme.borderRadius.normal};
-      }
-    `}
 `;
 
-export const DeviceMenuInner = styled.div`
+export const DeviceMenuInner = styled.div<DeviceMenuProps>`
   width: 200px;
   min-width: 200px;
   max-width: 200px;
@@ -39,4 +30,18 @@ export const DeviceMenuInner = styled.div`
   height: 200px;
   min-height: 200px;
   min-width: 200px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  border: 3px solid ${({ theme }) => theme.colors.white};
+  border-radius: ${({ theme }) => theme.borderRadius.normal};
+
+  ${({ isSelected }) =>
+    isSelected &&
+    css`
+      border-color: ${({ theme }) => theme.colors.green};
+    `}
 `;

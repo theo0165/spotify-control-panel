@@ -1,6 +1,8 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import usePlaylists from '../../hooks/usePlaylists';
+import SpeakerIcon from '../icons/SpeakerIcon';
 import Playlist from '../Playlist/Playlist';
+import TextStyles from '../TextStyles';
 import * as S from './Playlists.style';
 
 const Playlists: FC = () => {
@@ -39,8 +41,14 @@ const Playlists: FC = () => {
 
   return (
     <S.Wrapper ref={wrapperRef}>
-      <S.DeviceMenu isSelected={selectedIndex === 0}>
-        <S.DeviceMenuInner>Test</S.DeviceMenuInner>
+      <S.DeviceMenu>
+        <S.DeviceMenuInner isSelected={selectedIndex === 0}>
+          {/* TODO: Display current device */}
+          <SpeakerIcon color="white" width="96px" height="96px" />
+          <TextStyles fontWeight="bold" fontSize="large">
+            Devices
+          </TextStyles>
+        </S.DeviceMenuInner>
       </S.DeviceMenu>
       {userPlaylists.map((playlist, index) => (
         <Playlist
