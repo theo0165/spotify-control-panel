@@ -19,7 +19,6 @@ const Device: FC<DeviceProps> = ({ device, isActive, isCurrentDevice }) => (
         </TextStyles>
       </S.CurrentDevice>
     )}
-    {/* TODO: Add playing status */}
   </S.Wrapper>
 );
 
