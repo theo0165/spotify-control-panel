@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Device from '../../components/Device';
 import TextStyles from '../../components/TextStyles';
 import { useAppSelector } from '../../hooks/useAppSelector';
@@ -6,8 +6,28 @@ import * as S from './DeviceSelector.style';
 import { DeviceSelectorProps } from './DeviceSelector.types';
 
 const DeviceSelector: FC<DeviceSelectorProps> = ({ isActive }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
   const devices = useAppSelector(state => state.devices);
+  const activeDeviceIndex = devices.indexOf(devices.filter(device => device.isActive)[0]);
+  const [activeIndex, setActiveIndex] = useState(activeDeviceIndex >= 0 ? activeDeviceIndex : 0);
+
+  const handleKeydown = (e: KeyboardEvent) => {
+    switch (e.key) {
+      case 'r':
+        setActiveIndex(val => val - 1);
+        break;
+      case 'f':
+        setActiveIndex(val => val + 1);
+        break;
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeydown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeydown);
+    };
+  }, []);
 
   return (
     <S.Wrapper isActive={isActive}>
@@ -16,7 +36,12 @@ const DeviceSelector: FC<DeviceSelectorProps> = ({ isActive }) => {
       </TextStyles>
       <S.Devices>
         {devices.map((device, index) => (
-          <Device key={`device-${device.id}`} device={device} isActive={index === activeIndex} />
+          <Device
+            key={`device-${device.id}`}
+            device={device}
+            isActive={index === activeIndex}
+            isCurrentDevice={device.isActive}
+          />
         ))}
       </S.Devices>
     </S.Wrapper>
