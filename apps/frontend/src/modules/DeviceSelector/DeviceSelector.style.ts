@@ -2,7 +2,8 @@ import styled, { css } from 'styled-components';
 import { WrapperProps } from './DeviceSelector.types';
 
 export const Wrapper = styled.div<WrapperProps>`
-  background-color: blue;
+  background: ${({ theme }) => theme.colors.black};
+  padding: 24px;
   height: 100vh;
   width: 100vw;
   position: fixed;
@@ -18,4 +19,10 @@ export const Wrapper = styled.div<WrapperProps>`
     `}
 `;
 
-export const Devices = styled.div``;
+export const Devices = styled.div`
+  margin-top: 24px;
+  display: inline-flex;
+  flex-direction: column;
+  max-width: 300px;
+  row-gap: 8px;
+`;
