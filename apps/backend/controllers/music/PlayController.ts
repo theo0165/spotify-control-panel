@@ -30,6 +30,8 @@ const PlayController: Controller = async (req, res) => {
     },
   );
 
+  console.log(await playRequest.text());
+
   if (!playRequest.ok) {
     return res.status(playRequest.status).json({ error: 'Could not play' });
   }

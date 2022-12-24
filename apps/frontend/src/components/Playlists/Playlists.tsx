@@ -1,16 +1,36 @@
+import { startPlaying } from '@scp/utils';
 import { FC, useEffect, useRef, useState } from 'react';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import usePlaylists from '../../hooks/usePlaylists';
+import { switchModule } from '../../store/slices/applicationSlice';
 import SpeakerIcon from '../icons/SpeakerIcon';
 import Playlist from '../Playlist/Playlist';
 import TextStyles from '../TextStyles';
 import * as S from './Playlists.style';
 
 const Playlists: FC = () => {
+  const dispatch = useAppDispatch();
   const currentPage = useAppSelector(state => state.application.currentModule);
   const [userPlaylists] = usePlaylists();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+
+  // TODO: selectedIndex not updating
+  const startPlaylist = async () => {
+    if (selectedIndex <= 0) return;
+
+    const shouldPlay = userPlaylists[selectedIndex];
+    // TODO: Change to currently selected device
+    const couldStartPlaying = await startPlaying(
+      `spotify:playlist:${shouldPlay.id}`,
+      '3dd16d1b59e7b463f199dbd03d8a05c058bea2fc',
+    );
+
+    if (couldStartPlaying) {
+      dispatch(switchModule('player'));
+    }
+  };
 
   const keyDownHandler = (e: KeyboardEvent) => {
     switch (e.key) {
@@ -19,6 +39,9 @@ const Playlists: FC = () => {
         break;
       case 'a':
         setSelectedIndex(val => val - 1);
+        break;
+      case 'Enter':
+        startPlaylist();
         break;
     }
   };
@@ -29,7 +52,7 @@ const Playlists: FC = () => {
     return () => {
       document.removeEventListener('keydown', keyDownHandler);
     };
-  }, []);
+  }, [selectedIndex]);
 
   useEffect(() => {
     if (!wrapperRef.current) return;

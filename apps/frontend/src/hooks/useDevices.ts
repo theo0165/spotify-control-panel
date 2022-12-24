@@ -1,21 +1,18 @@
 import { Device } from '@scp/types';
 import { fetchWithCredentials, urlBuilder } from '@scp/utils';
 import { useEffect, useState } from 'react';
-import { setDevices } from '../store/slices/devicesSlice';
+import { devicesShouldUpdate, setDevices } from '../store/slices/devicesSlice';
 import { useAppDispatch } from './useAppDispatch';
 import { useAppSelector } from './useAppSelector';
 
 const useDevices = (): [Device[], boolean] => {
   const dispatch = useAppDispatch();
-  const devices = useAppSelector(state => state.devices);
+  const devices = useAppSelector(state => state.devices.devices);
+  const shouldUpdate = useAppSelector(state => state.devices.shouldUpdate);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+  const getDevices = () => {
     setIsLoading(true);
-    if (devices.length > 0) {
-      setIsLoading(false);
-      return;
-    }
 
     (async () => {
       const devicesRequest = await fetchWithCredentials(urlBuilder('/user/devices'));
@@ -26,6 +23,7 @@ const useDevices = (): [Device[], boolean] => {
       }
 
       const devicesData = await devicesRequest.json();
+      console.log({ devicesData });
 
       if (!devicesData || devicesData.error) {
         setIsLoading(false);
@@ -35,7 +33,16 @@ const useDevices = (): [Device[], boolean] => {
       dispatch(setDevices(devicesData));
       setIsLoading(false);
     })();
-  }, []);
+  };
+
+  useEffect(getDevices, []);
+
+  useEffect(() => {
+    if (shouldUpdate) {
+      getDevices();
+      dispatch(devicesShouldUpdate(false));
+    }
+  }, [shouldUpdate]);
 
   return [devices, isLoading];
 };
