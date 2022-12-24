@@ -1,5 +1,5 @@
 import { SpotifyToken } from './server';
-import { Playlist, User } from './Spotify';
+import { Device, Playlist, User } from './Spotify';
 
 export * from './server';
 export * from './Spotify';
@@ -30,5 +30,6 @@ declare module 'express-session' {
     token?: SpotifyToken;
     user?: User;
     playlists: Playlist[];
+    devices: Device[];
   }
 }

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { DeviceMenuProps } from './Playlists.types';
 
 export const Wrapper = styled.div`
-  overflow: scroll;
+  overflow: hidden;
   display: flex;
   column-gap: 32px;
   margin-left: 24px;

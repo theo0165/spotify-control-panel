@@ -1,4 +1,5 @@
 import { FC, useEffect, useRef, useState } from 'react';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import usePlaylists from '../../hooks/usePlaylists';
 import SpeakerIcon from '../icons/SpeakerIcon';
 import Playlist from '../Playlist/Playlist';
@@ -6,6 +7,7 @@ import TextStyles from '../TextStyles';
 import * as S from './Playlists.style';
 
 const Playlists: FC = () => {
+  const currentPage = useAppSelector(state => state.application.currentModule);
   const [userPlaylists] = usePlaylists();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -38,6 +40,10 @@ const Playlists: FC = () => {
       behavior: 'smooth',
     });
   }, [selectedIndex]);
+
+  useEffect(() => {
+    setTimeout(() => setSelectedIndex(0), 200);
+  }, [currentPage]);
 
   return (
     <S.Wrapper ref={wrapperRef}>
