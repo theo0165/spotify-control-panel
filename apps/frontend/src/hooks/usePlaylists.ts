@@ -1,13 +1,13 @@
 import { Playlist } from '@scp/types';
 import { fetchWithCredentials, urlBuilder } from '@scp/utils';
 import { useEffect, useState } from 'react';
-import { setPlaylists } from '../store/slices/userSlice';
+import { setPlaylists } from '../store/slices/playlistsSlice';
 import { useAppDispatch } from './useAppDispatch';
 import { useAppSelector } from './useAppSelector';
 
 const usePlaylists = (): [Playlist[], boolean] => {
   const dispatch = useAppDispatch();
-  const playlists = useAppSelector(state => state.user.playlists);
+  const playlists = useAppSelector(state => state.playlists);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
