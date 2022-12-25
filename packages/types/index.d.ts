@@ -1,6 +1,7 @@
 import { SpotifyToken } from './server';
 import { Device, Playlist, User } from './Spotify';
 
+export * from './events';
 export * from './server';
 export * from './Spotify';
 export * from './states';

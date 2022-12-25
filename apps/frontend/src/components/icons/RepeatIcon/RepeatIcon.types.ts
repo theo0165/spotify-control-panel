@@ -5,7 +5,7 @@ export interface RepeatIconProps extends IconBase {}
 export interface PathPropsInterface {
   fill: 'none';
   stroke: string;
-  strokeLikecap: 'round';
+  strokeLinecap: 'round';
   strokeLinejoin: 'round';
   strokeWidth: '32px';
 }

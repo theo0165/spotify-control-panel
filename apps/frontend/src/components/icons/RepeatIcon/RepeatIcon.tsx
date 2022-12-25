@@ -6,7 +6,7 @@ const RepeatIcon: FC<RepeatIconProps> = ({ width, height, color }) => {
   const pathProps: PathPropsInterface = {
     fill: 'none',
     stroke: color ? colors[color] : colors.white,
-    strokeLikecap: 'round',
+    strokeLinecap: 'round',
     strokeLinejoin: 'round',
     strokeWidth: '32px',
   };
