@@ -3,12 +3,18 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
 import session from 'express-session';
+import { createServer } from 'http';
 import RedisClient from './lib/RedisClient';
+import Socket from './lib/socket';
 import router from './routes';
 
 const PORT = process.env.SERVER_PORT ?? 3001;
 const app = express();
 const StoreRedis = connectRedis(session);
+
+const httpServer = createServer(app);
+
+Socket.getInstance(httpServer);
 
 app.use(
   cors({
@@ -35,6 +41,6 @@ app.use(
 
 app.use('/', router);
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });

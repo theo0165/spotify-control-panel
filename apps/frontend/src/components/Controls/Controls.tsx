@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import BackwardIcon from '../icons/BackwardIcon';
+import ForwardIcon from '../icons/ForwardIcon';
 import PauseIcon from '../icons/PauseIcon';
 import PlayIcon from '../icons/PlayIcon';
 import RepeatIcon from '../icons/RepeatIcon';
@@ -16,15 +18,19 @@ const Controls: FC<ControlsProps> = ({ duration, progress, isPlaying, isShuffle,
         <ShuffleIcon width="48px" height="48px" color={isShuffle ? 'green' : 'white'} />
       </S.Shuffle>
       <S.ContentControls>
-        <S.Backward width="32px" height="32px" />
+        <S.Backward>
+          <BackwardIcon width="36px" height="36px" />
+        </S.Backward>
         <S.PlayPause>
           {isPlaying ? (
-            <PauseIcon width="36px" height="36px" />
+            <PauseIcon width="32px" height="32px" />
           ) : (
-            <PlayIcon width="36px" height="36px" />
+            <PlayIcon width="32px" height="32px" />
           )}
         </S.PlayPause>
-        <S.Forward width="32px" height="32px" />
+        <S.Forward>
+          <ForwardIcon width="36px" height="36px" />
+        </S.Forward>
       </S.ContentControls>
       <S.Repeat>
         <RepeatIcon width="48px" height="48px" color={isRepeat ? 'green' : 'white'} />

@@ -1,20 +1,5 @@
-import styled, { css } from 'styled-components';
-import BackwardIcon from '../icons/BackwardIcon';
-import ForwardIcon from '../icons/ForwardIcon';
+import styled from 'styled-components';
 import { TimelineInnerProps } from './Controls.types';
-
-const SelectedState = css`
-  background: ${({ theme }) => theme.colors.white};
-  border-radius: ${({ theme }) => theme.borderRadius.round};
-  padding: 4px;
-
-  /* svg {
-    > path,
-    > polyline {
-      fill: ${({ theme }) => theme.colors.black};
-    }
-  } */
-`;
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -41,14 +26,8 @@ export const Controls = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
 
-export const Shuffle = styled.div`
-  &[data-selected='true'] {
-    ${SelectedState}
-  }
-
-  > svg {
+  svg {
     display: block;
   }
 `;
@@ -57,41 +36,15 @@ export const ContentControls = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  column-gap: 18px;
+  column-gap: 32px;
 `;
 
-export const Repeat = styled.div`
-  &[data-selected='true'] {
-    ${SelectedState}
-  }
+export const Repeat = styled.div``;
 
-  > svg {
-    display: block;
-  }
-`;
+export const Shuffle = styled.div``;
 
-export const Backward = styled(BackwardIcon)`
-  &[data-selected='true'] {
-    ${SelectedState}
-  }
+export const Backward = styled.div``;
 
-  display: block;
-`;
+export const PlayPause = styled.div``;
 
-export const PlayPause = styled.div`
-  &[data-selected='true'] {
-    ${SelectedState}
-  }
-
-  > svg {
-    display: block;
-  }
-`;
-
-export const Forward = styled(ForwardIcon)`
-  &[data-selected='true'] {
-    ${SelectedState}
-  }
-
-  display: block;
-`;
+export const Forward = styled.div``;

@@ -9,3 +9,8 @@ export interface ControlsProps {
 export interface TimelineInnerProps {
   width: number;
 }
+
+export interface ShuffleRepeatProps {
+  isActive: boolean;
+  isSelected: boolean;
+}
