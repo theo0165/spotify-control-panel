@@ -14,7 +14,11 @@ const StoreRedis = connectRedis(session);
 
 const httpServer = createServer(app);
 
-Socket.getInstance(httpServer);
+const socket = Socket.getInstance(httpServer);
+
+socket.on('connection', client => {
+  console.log(`User connected: ${client.id}`);
+});
 
 app.use(
   cors({

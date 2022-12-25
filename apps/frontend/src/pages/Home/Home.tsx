@@ -1,5 +1,6 @@
-import { FC, useEffect } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { SocketContext } from '../../context/socket';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import useProtectedRoute from '../../hooks/useProtectedRoute';
 import DeviceSelector from '../../modules/DeviceSelector';
@@ -9,6 +10,7 @@ import { switchModule } from '../../store/slices/applicationSlice';
 
 const HomePage: FC = () => {
   useProtectedRoute();
+  const socket = useContext(SocketContext);
   const currentModule = useAppSelector(state => state.application.currentModule);
   const dispatch = useDispatch();
 
@@ -33,6 +35,10 @@ const HomePage: FC = () => {
       document.removeEventListener('keydown', handlePageChange);
     };
   }, []);
+
+  useEffect(() => {
+    console.log(socket);
+  }, [socket]);
 
   return (
     <>
