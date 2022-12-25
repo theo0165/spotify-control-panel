@@ -1,4 +1,4 @@
-export interface ApiDevices {
+export interface ApiDevice {
   id: string;
   is_active: boolean;
   is_private_session: boolean;

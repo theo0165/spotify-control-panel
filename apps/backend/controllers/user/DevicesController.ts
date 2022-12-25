@@ -1,4 +1,4 @@
-import { ApiDevices, Controller } from '@scp/types';
+import { ApiDevice, Controller } from '@scp/types';
 import { getSpofityData, isError } from '@scp/utils';
 
 const DevicesController: Controller = async (req, res) => {
@@ -8,7 +8,7 @@ const DevicesController: Controller = async (req, res) => {
     return res.json(req.session.devices);
   }
 
-  const devices = await getSpofityData<{ devices: ApiDevices[] }>('/me/player/devices', req);
+  const devices = await getSpofityData<{ devices: ApiDevice[] }>('/me/player/devices', req);
 
   if (!devices) return res.json({ error: 'Something went wrong' });
   if (isError(devices)) return res.json({ error: devices.error });

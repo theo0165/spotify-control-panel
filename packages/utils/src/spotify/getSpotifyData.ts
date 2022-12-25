@@ -2,10 +2,15 @@ import { Request } from 'express';
 import { refreshToken } from './refreshToken';
 import { spotifyUrlBuilder } from './spotifyUrlBuilder';
 
-export const getSpofityData = async <T>(endpoint: string, req: Request) => {
+export const getSpofityData = async <T>(
+  endpoint: string,
+  req: Request,
+  noContentCheck?: boolean,
+) => {
   let tries = 0;
-  let data: T | undefined;
+  let data: T | null | undefined;
 
+  // eslint-disable-next-line no-unreachable-loop
   while (true) {
     if (tries > 4) break;
 
@@ -24,6 +29,11 @@ export const getSpofityData = async <T>(endpoint: string, req: Request) => {
       },
     });
 
+    if (!!noContentCheck && dataRequest.status === 204) {
+      data = null;
+      break;
+    }
+
     const response = await dataRequest.json();
 
     if (dataRequest.ok) {
@@ -34,7 +44,7 @@ export const getSpofityData = async <T>(endpoint: string, req: Request) => {
     tries += 1;
   }
 
-  if (!data) return { error: 'Something went wrong' };
+  if (!data && !noContentCheck) return { error: 'Something went wrong' };
 
   return data;
 };
