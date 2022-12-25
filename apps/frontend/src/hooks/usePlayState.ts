@@ -17,6 +17,7 @@ const usePlayState = (withUpdates: boolean) => {
     }
 
     const newState: PlaybackState = await stateRequest.json();
+
     dispatch(setPlayState(newState));
     dispatch(setIsTrueState(true));
   };

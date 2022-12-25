@@ -21,9 +21,10 @@ export const playstateSlice = createSlice({
   name: 'playstate',
   initialState: initialPlaybackState,
   reducers: {
-    setPlayState: (state, action: PayloadAction<PlaybackState>) => {
-      state = { ...action.payload };
-    },
+    setPlayState: (state, action: PayloadAction<PlaybackState>) => ({
+      ...state,
+      ...action.payload,
+    }),
     setIsTrueState: (state, action: PayloadAction<boolean>) => {
       state.isTrueState = action.payload;
     },
