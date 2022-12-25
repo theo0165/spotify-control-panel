@@ -9,5 +9,6 @@ export interface ApiPlaylist {
   };
   owner: {
     display_name: string | null;
+    id: string | null;
   };
 }

@@ -27,6 +27,7 @@ const usePlayState = (withUpdates: boolean) => {
 
     (async () => {
       if (withUpdates) {
+        await updateState();
         timer = setInterval(updateState, 15 * 1000);
       } else {
         await updateState();

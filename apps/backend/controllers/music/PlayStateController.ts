@@ -37,6 +37,26 @@ const PlayStateController: Controller = async (req, res) => {
   const { artists, duration_ms: duration, id, name, album } = item;
   const { images } = album;
 
+  let contextData = null;
+
+  if (context?.href) {
+    const contextRequest = await fetch(context?.href, {
+      headers: {
+        Authorization: `Bearer ${req.session.token.accessToken}`,
+      },
+    });
+
+    if (contextRequest.ok) {
+      const contextParsed = await contextRequest.json();
+
+      contextData = {
+        id: contextParsed.id,
+        name: contextParsed.name,
+        owner: contextParsed.owner.id,
+      };
+    }
+  }
+
   return res.json({
     shuffle: playState.shuffle_state,
     repeat: playState.repeat_state,
@@ -49,7 +69,7 @@ const PlayStateController: Controller = async (req, res) => {
       image: images ? images[0].url : null,
     },
     artists: artists.map(artist => ({ name: artist.name, id: artist.id })),
-    context: context ? context.uri : null,
+    context: contextData || context?.uri,
   });
 };
 

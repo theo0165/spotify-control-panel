@@ -23,7 +23,6 @@ const useDevices = (): [Device[], boolean] => {
       }
 
       const devicesData = await devicesRequest.json();
-      console.log({ devicesData });
 
       if (!devicesData || devicesData.error) {
         setIsLoading(false);

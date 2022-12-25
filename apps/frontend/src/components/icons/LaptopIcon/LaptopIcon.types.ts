@@ -1,7 +1,3 @@
-import colors from '../../../theme/colors';
+import { IconBase } from '../../../types/IconBase';
 
-export interface LaptopIconProps {
-  color?: keyof typeof colors;
-  width?: string;
-  height?: string;
-}
+export interface LaptopIconProps extends IconBase {}

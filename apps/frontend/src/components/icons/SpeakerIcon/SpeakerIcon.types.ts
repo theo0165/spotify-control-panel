@@ -1,7 +1,3 @@
-import colors from '../../../theme/colors';
+import { IconBase } from '../../../types/IconBase';
 
-export interface SpeakerIconProps {
-  color?: keyof typeof colors;
-  width?: string;
-  height?: string;
-}
+export interface SpeakerIconProps extends IconBase {}

@@ -16,7 +16,9 @@
     "import/prefer-default-export": "off",
     "implicit-arrow-linebreak": "off",
     "operator-linebreak": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "no-nested-ternary": "off"
   },
   "parserOptions": {
     "ecmaFeatures": {

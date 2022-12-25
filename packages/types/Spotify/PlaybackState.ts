@@ -1,3 +1,12 @@
+type Context =
+  | {
+      id: string | null;
+      name: string | null;
+      owner: string | null;
+    }
+  | string
+  | null;
+
 export interface PlaybackState {
   isTrueState: boolean;
   shuffle: boolean;
@@ -14,5 +23,5 @@ export interface PlaybackState {
     name: string | null;
     id: string | null;
   }[];
-  context: string | null;
+  context: Context;
 }
