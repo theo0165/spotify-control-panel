@@ -4,7 +4,6 @@ import cors from 'cors';
 import express from 'express';
 import session from 'express-session';
 import { createServer } from 'http';
-import userInteraction from './events/userInteraction';
 import RedisClient from './lib/RedisClient';
 import Socket from './lib/socket';
 import router from './routes';
@@ -18,9 +17,9 @@ const httpServer = createServer(app);
 const socket = Socket.getInstance(httpServer);
 
 socket.on('connection', client => {
-  console.log('user connect');
+  console.log('user connect', client.id);
 
-  userInteraction(client, socket);
+  // userInteraction(client, socket);
 });
 
 app.use(

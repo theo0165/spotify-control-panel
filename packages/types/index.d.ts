@@ -1,7 +1,6 @@
 import { SpotifyToken } from './server';
 import { Device, Playlist, User } from './Spotify';
 
-export * from './events';
 export * from './server';
 export * from './Spotify';
 export * from './states';
@@ -34,3 +33,14 @@ declare module 'express-session' {
     devices: Device[];
   }
 }
+
+export enum CustomEnumTest {}
+
+// export enum MovementEvents {
+//   USER_INTERACT = 'USER_INTERACT',
+//   LEFT = 'USER_INTERACT_LEFT',
+//   RIGHT = 'USER_INTERACT_RIGHT',
+//   CLICK = 'USER_INTERACT_CLICK',
+//   DOUBLE_CLICK = 'USER_INTERACT_DOUBLE_CLICK',
+//   LONG_CLICK = 'USER_INTERACT_LONG_CLICK',
+// }

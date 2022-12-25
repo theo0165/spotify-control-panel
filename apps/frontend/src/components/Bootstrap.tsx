@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import useApplication from '../hooks/useApplication';
 import useDevices from '../hooks/useDevices';
+import useEvents from '../hooks/useEvents';
 import useMe from '../hooks/useMe';
 import usePlaylists from '../hooks/usePlaylists';
 import usePlayState from '../hooks/usePlayState';
@@ -11,6 +12,7 @@ const Bootstrap: FC = () => {
   usePlaylists();
   useDevices();
   usePlayState(false);
+  useEvents();
 
   return null;
 };
