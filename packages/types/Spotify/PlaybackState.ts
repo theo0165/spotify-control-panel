@@ -1,4 +1,5 @@
 export interface PlaybackState {
+  isTrueState: boolean;
   shuffle: boolean;
   repeat: 'off' | 'context' | 'current';
   progress: number;
@@ -6,12 +7,12 @@ export interface PlaybackState {
   isPlaying: boolean;
   song: {
     image: string | null;
-    name: string;
-    id: string;
+    name: string | null;
+    id: string | null;
   };
   artists: {
-    name: string;
-    id: string;
+    name: string | null;
+    id: string | null;
   }[];
-  context: string;
+  context: string | null;
 }
