@@ -46,11 +46,12 @@ export const ContextName = styled(TextStyles)`
 
 export const SongName = styled(TextStyles)`
   font-size: 32px;
-  margin: 8px 0 12px 0;
+  margin: 8px 0 4px 0;
 `;
 
 export const ArtistName = styled(TextStyles)`
   font-weight: ${({ theme }) => theme.fontWeights.light};
+  margin-bottom: 4px;
 `;
 
 export const BottomContent = styled.div`

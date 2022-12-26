@@ -1,3 +1,4 @@
+import { translateTime } from '@scp/utils';
 import { FC, useEffect, useState } from 'react';
 import Controls from '../../components/Controls';
 import SongLoading from '../../components/loading/SongLoading';
@@ -59,7 +60,9 @@ const Player: FC<PlayerProps> = ({ isActive }) => {
             {playState.artists.length > 0 && (
               <S.ArtistName>{playState.artists[0].name}</S.ArtistName>
             )}
-            <TextStyles>{`${progress} ${duration}`}</TextStyles>
+            <TextStyles fontWeight="light" fontSize="small">
+              {`${translateTime(progress)} - ${translateTime(duration)}`}
+            </TextStyles>
           </S.Meta>
         </>
       )}
