@@ -6,6 +6,7 @@ import useEventConsumer from '../../hooks/useEventConsumer';
 import usePlaylists from '../../hooks/usePlaylists';
 import { switchModule } from '../../store/slices/applicationSlice';
 import { setEvent } from '../../store/slices/eventSlice';
+import { stateShouldUpdate } from '../../store/slices/playstateSlice';
 import SpeakerIcon from '../icons/SpeakerIcon';
 import Playlist from '../Playlist/Playlist';
 import TextStyles from '../TextStyles';
@@ -31,6 +32,7 @@ const Playlists: FC = () => {
     );
 
     if (couldStartPlaying) {
+      dispatch(stateShouldUpdate(true));
       dispatch(switchModule('player'));
     }
   };

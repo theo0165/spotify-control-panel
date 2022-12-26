@@ -8,6 +8,7 @@ type Context =
   | null;
 
 export interface PlaybackState {
+  shouldUpdate: boolean;
   isTrueState: boolean;
   shuffle: boolean;
   repeat: 'off' | 'context' | 'current';

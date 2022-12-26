@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { PlaybackState } from '@scp/types';
 
 export const initialPlaybackState: PlaybackState = {
+  shouldUpdate: false,
   isTrueState: false,
   shuffle: false,
   repeat: 'off',
@@ -28,9 +29,12 @@ export const playstateSlice = createSlice({
     setIsTrueState: (state, action: PayloadAction<boolean>) => {
       state.isTrueState = action.payload;
     },
+    stateShouldUpdate: (state, action: PayloadAction<boolean>) => {
+      state.shouldUpdate = action.payload;
+    },
   },
 });
 
-export const { setPlayState, setIsTrueState } = playstateSlice.actions;
+export const { setPlayState, setIsTrueState, stateShouldUpdate } = playstateSlice.actions;
 
 export default playstateSlice.reducer;
