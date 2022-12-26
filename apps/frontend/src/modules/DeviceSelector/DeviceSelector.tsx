@@ -58,6 +58,10 @@ const DeviceSelector: FC<DeviceSelectorProps> = ({ isActive }) => {
     }
   }, [events, activeIndex, eventsActive]);
 
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [currentPage]);
+
   return (
     <S.Wrapper isActive={isActive}>
       <TextStyles as="h3" fontWeight="normal">
