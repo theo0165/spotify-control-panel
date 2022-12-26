@@ -15,28 +15,6 @@ const HomePage: FC = () => {
   const dispatch = useDispatch();
   const [events, eventsActive] = useEventConsumer(true);
 
-  const handlePageChange = (e: KeyboardEvent) => {
-    switch (e.key) {
-      case 'w':
-        dispatch(switchModule('frontpage'));
-        break;
-      case 's':
-        dispatch(switchModule('player'));
-        break;
-      case 'e':
-        dispatch(switchModule('device'));
-        break;
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('keydown', handlePageChange);
-
-    return () => {
-      document.removeEventListener('keydown', handlePageChange);
-    };
-  }, []);
-
   useEffect(() => {
     if (!eventsActive) return;
 
