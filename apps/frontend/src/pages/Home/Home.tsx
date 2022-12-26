@@ -1,4 +1,5 @@
 import { FC, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import useEventConsumer from '../../hooks/useEventConsumer';
@@ -11,6 +12,7 @@ import { setEvent } from '../../store/slices/eventSlice';
 
 const HomePage: FC = () => {
   useProtectedRoute();
+  const title = useAppSelector(state => state.application.name);
   const currentModule = useAppSelector(state => state.application.currentModule);
   const dispatch = useDispatch();
   const [events, eventsActive] = useEventConsumer(true);
@@ -26,6 +28,9 @@ const HomePage: FC = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
       <FrontPage />
       <Player isActive={currentModule === 'player'} />
       <DeviceSelector isActive={currentModule === 'device'} />
