@@ -26,6 +26,7 @@ const PlayController: Controller = async (req, res) => {
       },
       body: JSON.stringify({
         context_uri: playlist,
+        play: false,
       }),
     },
   );

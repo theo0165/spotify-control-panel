@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+import { EventState } from '@scp/types';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from './useAppSelector';
 
 /*
  * Usage:
@@ -9,6 +11,15 @@ import { useEffect } from 'react';
  *  }, [events])
  */
 
-const useEventConsumer = (isActive: boolean) => {
-  useEffect(() => {}, []);
+const useEventConsumer = (isActive: boolean): [Partial<EventState>, boolean] => {
+  const events = useAppSelector(state => state.event);
+  const [active, setActive] = useState(isActive);
+
+  useEffect(() => {
+    setActive(isActive);
+  }, [isActive, events]);
+
+  return [isActive ? events : {}, active];
 };
+
+export default useEventConsumer;

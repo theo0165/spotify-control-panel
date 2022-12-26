@@ -2,8 +2,10 @@ import { startPlaying } from '@scp/utils';
 import { FC, useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import useEventConsumer from '../../hooks/useEventConsumer';
 import usePlaylists from '../../hooks/usePlaylists';
 import { switchModule } from '../../store/slices/applicationSlice';
+import { setEvent } from '../../store/slices/eventSlice';
 import SpeakerIcon from '../icons/SpeakerIcon';
 import Playlist from '../Playlist/Playlist';
 import TextStyles from '../TextStyles';
@@ -12,6 +14,7 @@ import * as S from './Playlists.style';
 const Playlists: FC = () => {
   const dispatch = useAppDispatch();
   const currentPage = useAppSelector(state => state.application.currentModule);
+  const [events, eventsActive] = useEventConsumer(currentPage === 'frontpage');
   const [userPlaylists] = usePlaylists();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -32,27 +35,33 @@ const Playlists: FC = () => {
     }
   };
 
-  const keyDownHandler = (e: KeyboardEvent) => {
-    switch (e.key) {
-      case 'd':
-        setSelectedIndex(val => val + 1);
-        break;
-      case 'a':
-        setSelectedIndex(val => val - 1);
-        break;
-      case 'Enter':
-        startPlaylist();
-        break;
-    }
-  };
-
+  // FIXME: Playlists jump when switching module
   useEffect(() => {
-    document.addEventListener('keydown', keyDownHandler);
+    if (!eventsActive) return;
 
-    return () => {
-      document.removeEventListener('keydown', keyDownHandler);
-    };
-  }, [selectedIndex]);
+    if (events?.right && selectedIndex < userPlaylists.length) {
+      setSelectedIndex(val => val + 1);
+      dispatch(setEvent({ name: 'right', value: false }));
+    }
+
+    if (events?.left && selectedIndex > 0) {
+      setSelectedIndex(val => val - 1);
+      dispatch(setEvent({ name: 'left', value: false }));
+    }
+
+    console.log('outside playlist click');
+
+    if (events?.click) {
+      console.log('playlist click');
+
+      if (selectedIndex === 0) {
+        dispatch(switchModule('device'));
+      } else {
+        startPlaylist();
+      }
+      dispatch(setEvent({ name: 'click', value: false }));
+    }
+  }, [events, selectedIndex, eventsActive]);
 
   useEffect(() => {
     if (!wrapperRef.current) return;

@@ -4,7 +4,9 @@ import Device from '../../components/Device';
 import TextStyles from '../../components/TextStyles';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import useEventConsumer from '../../hooks/useEventConsumer';
 import { devicesShouldUpdate } from '../../store/slices/devicesSlice';
+import { setEvent } from '../../store/slices/eventSlice';
 import * as S from './DeviceSelector.style';
 import { DeviceSelectorProps } from './DeviceSelector.types';
 
@@ -13,6 +15,8 @@ const DeviceSelector: FC<DeviceSelectorProps> = ({ isActive }) => {
   const devices = useAppSelector(state => state.devices.devices);
   const activeDeviceIndex = devices.indexOf(devices.filter(device => device.isActive)[0]);
   const [activeIndex, setActiveIndex] = useState(activeDeviceIndex >= 0 ? activeDeviceIndex : 0);
+  const currentPage = useAppSelector(state => state.application.currentModule);
+  const [events, eventsActive] = useEventConsumer(currentPage === 'device');
 
   const switchDevice = async () => {
     if (activeIndex < 0) return;
@@ -35,27 +39,24 @@ const DeviceSelector: FC<DeviceSelectorProps> = ({ isActive }) => {
     // TODO: Toats if not ok request
   };
 
-  const handleKeydown = (e: KeyboardEvent) => {
-    switch (e.key) {
-      case 'r':
-        setActiveIndex(val => val - 1);
-        break;
-      case 'f':
-        setActiveIndex(val => val + 1);
-        break;
-      case 'p':
-        switchDevice();
-        break;
-    }
-  };
-
   useEffect(() => {
-    document.addEventListener('keydown', handleKeydown);
+    if (!eventsActive) return;
 
-    return () => {
-      document.removeEventListener('keydown', handleKeydown);
-    };
-  }, [activeIndex]);
+    if (events?.right && activeIndex < devices.length) {
+      setActiveIndex(val => val + 1);
+      dispatch(setEvent({ name: 'right', value: false }));
+    }
+
+    if (events?.left && activeIndex > 0) {
+      setActiveIndex(val => val - 1);
+      dispatch(setEvent({ name: 'left', value: false }));
+    }
+
+    if (events?.click) {
+      switchDevice();
+      dispatch(setEvent({ name: 'click', value: false }));
+    }
+  }, [events, activeIndex, eventsActive]);
 
   return (
     <S.Wrapper isActive={isActive}>

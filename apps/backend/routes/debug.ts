@@ -9,6 +9,8 @@ router.get('/movement', (req: Request, res: Response) => {
 
   const socket = Socket.getInstance();
 
+  console.log(action);
+
   socket.emit(action);
 
   res.send('OK');

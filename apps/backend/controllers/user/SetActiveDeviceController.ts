@@ -20,7 +20,7 @@ const SetActiveDeviceController: Controller = async (req, res) => {
     },
     body: JSON.stringify({
       device_ids: [device],
-      play: true,
+      play: false,
     }),
   });
 
