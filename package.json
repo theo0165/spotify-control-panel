@@ -14,7 +14,8 @@
     "utils:lint": "yarn workspace @scp/utils lint",
     "start": "concurrently \"yarn utils:start\" \"yarn backend:start\" \"yarn frontend:start\"",
     "lint": "yarn frontend:lint && yarn backend:lint",
-    "migrate": "env-cmd -f .env yarn workspace @scp/backend migrate"
+    "migrate": "env-cmd -f .env yarn workspace @scp/backend migrate",
+    "seed": "env-cmd -f .env yarn workspace @scp/backend seed"
   },
   "dependencies": {},
   "devDependencies": {

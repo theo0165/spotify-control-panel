@@ -7,7 +7,11 @@
   "scripts": {
     "start": "nodemon index.ts",
     "lint": "eslint .",
-    "migrate": "prisma migrate"
+    "migrate": "prisma migrate",
+    "seed": "prisma db seed"
+  },
+  "prisma": {
+    "seed": "ts-node --transpile-only prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.8.0",
