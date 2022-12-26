@@ -40,8 +40,6 @@ const HomePage: FC = () => {
   useEffect(() => {
     if (!eventsActive) return;
 
-    console.log({ events, currentModule });
-
     if (events?.longClick) {
       dispatch(switchModule(currentModule === 'frontpage' ? 'player' : 'frontpage'));
       dispatch(setEvent({ name: 'longClick', value: false }));

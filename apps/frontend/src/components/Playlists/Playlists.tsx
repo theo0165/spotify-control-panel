@@ -49,11 +49,7 @@ const Playlists: FC = () => {
       dispatch(setEvent({ name: 'left', value: false }));
     }
 
-    console.log('outside playlist click');
-
     if (events?.click) {
-      console.log('playlist click');
-
       if (selectedIndex === 0) {
         dispatch(switchModule('device'));
       } else {
