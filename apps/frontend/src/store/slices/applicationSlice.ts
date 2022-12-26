@@ -3,7 +3,7 @@ import { ApplicationState } from '@scp/types';
 
 const initialState: ApplicationState = {
   name: '',
-  currentModule: 'frontpage',
+  currentModule: 'frontpage', // 'frontpage',
 };
 
 export const applicationSlice = createSlice({

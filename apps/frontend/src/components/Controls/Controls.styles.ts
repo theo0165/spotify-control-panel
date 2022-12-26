@@ -1,5 +1,11 @@
-import styled from 'styled-components';
-import { TimelineInnerProps } from './Controls.types';
+/* eslint-disable no-confusing-arrow */
+import styled, { css } from 'styled-components';
+import {
+  ContentControlProps,
+  PlayPauseProps,
+  ShuffleRepeatProps,
+  TimelineInnerProps,
+} from './Controls.types';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -39,12 +45,59 @@ export const ContentControls = styled.div`
   column-gap: 32px;
 `;
 
-export const Repeat = styled.div``;
+export const Repeat = styled.div<ShuffleRepeatProps>`
+  stroke: ${({ isActive, theme }) => (isActive ? theme.colors.green : theme.colors.white)};
+  padding: 9px 10px 9px 10px;
+  border-radius: 100%;
 
-export const Shuffle = styled.div``;
+  ${({ isSelected, theme }) =>
+    isSelected &&
+    css`
+      background: ${theme.colors.controlsActiveBg};
+    `}
+`;
 
-export const Backward = styled.div``;
+export const Shuffle = styled.div<ShuffleRepeatProps>`
+  stroke: ${({ isActive, theme }) => (isActive ? theme.colors.green : theme.colors.white)};
+  padding: 9px 10px 9px 10px;
+  border-radius: 100%;
 
-export const PlayPause = styled.div``;
+  ${({ isSelected, theme }) =>
+    isSelected &&
+    css`
+      background: ${theme.colors.controlsActiveBg};
+    `}
+`;
 
-export const Forward = styled.div``;
+export const Backward = styled.div<ContentControlProps>`
+  padding: 12px 14px 12px 12px;
+  border-radius: 100%;
+
+  ${({ isSelected, theme }) =>
+    isSelected &&
+    css`
+      background: ${theme.colors.controlsActiveBg};
+    `}
+`;
+
+export const PlayPause = styled.div<PlayPauseProps>`
+  padding: ${({ isPlay }) => (isPlay ? '12px 13px 12px 13px' : '12px 10px 12px 16px')};
+  border-radius: 100%;
+
+  ${({ isSelected, theme }) =>
+    isSelected &&
+    css`
+      background: ${theme.colors.controlsActiveBg};
+    `}
+`;
+
+export const Forward = styled.div<ContentControlProps>`
+  padding: 12px 12px 12px 14px;
+  border-radius: 100%;
+
+  ${({ isSelected, theme }) =>
+    isSelected &&
+    css`
+      background: ${theme.colors.controlsActiveBg};
+    `}
+`;

@@ -11,7 +11,7 @@ const Bootstrap: FC = () => {
   useMe();
   usePlaylists();
   useDevices();
-  usePlayState(false);
+  usePlayState(true);
   useEvents();
 
   return null;

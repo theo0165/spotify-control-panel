@@ -14,3 +14,12 @@ export interface ShuffleRepeatProps {
   isActive: boolean;
   isSelected: boolean;
 }
+
+export interface ContentControlProps {
+  isSelected: boolean;
+}
+
+export interface PlayPauseProps {
+  isSelected: boolean;
+  isPlay: boolean;
+}
