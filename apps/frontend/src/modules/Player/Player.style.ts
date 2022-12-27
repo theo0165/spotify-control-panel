@@ -1,9 +1,15 @@
+/* eslint-disable no-confusing-arrow */
+import { lighten } from 'polished';
 import styled, { css } from 'styled-components';
 import TextStyles from '../../components/TextStyles';
 import { WrapperProps } from './Player.types';
 
 export const Wrapper = styled.div<WrapperProps>`
-  background-color: ${({ theme }) => theme.colors.black};
+  background: ${({ background, theme }) =>
+    background
+      ? `radial-gradient(circle, ${lighten(0.1, background)} 0%, ${background} 100%);`
+      : theme.colors.black};
+  color: ${({ isDark, theme }) => (isDark ? theme.colors.white : theme.colors.black)};
   height: 100vh;
   width: 100vw;
   position: fixed;

@@ -52,7 +52,7 @@ const PlayStateController: Controller = async (req, res) => {
       contextData = {
         id: contextParsed.id,
         name: contextParsed.name,
-        owner: contextParsed.owner.id,
+        owner: contextParsed?.owner?.id ?? null,
       };
     }
   }

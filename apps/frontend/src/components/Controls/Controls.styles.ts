@@ -1,22 +1,26 @@
 /* eslint-disable no-confusing-arrow */
+import { darken } from 'polished';
 import styled, { css } from 'styled-components';
 import {
   ContentControlProps,
+  ControlsWrapperProps,
   PlayPauseProps,
   ShuffleRepeatProps,
   TimelineInnerProps,
 } from './Controls.types';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<ControlsWrapperProps>`
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+  background: ${({ background }) => (background ? darken(0.3, background) : 'transparent')};
 `;
 
 export const Timeline = styled.div`
   height: 3px;
   width: 100%;
+  background: ${({ theme }) => theme.colors.black};
 `;
 
 export const TimelineInner = styled.div<TimelineInnerProps>`

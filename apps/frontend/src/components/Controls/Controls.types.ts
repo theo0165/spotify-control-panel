@@ -4,6 +4,11 @@ export interface ControlsProps {
   isPlaying: boolean;
   isShuffle: boolean;
   isRepeat: boolean;
+  background: string | null;
+}
+
+export interface ControlsWrapperProps {
+  background: string | null;
 }
 
 export interface TimelineInnerProps {

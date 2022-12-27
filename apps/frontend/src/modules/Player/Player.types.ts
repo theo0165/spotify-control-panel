@@ -4,4 +4,6 @@ export interface PlayerProps {
 
 export interface WrapperProps {
   isActive: boolean;
+  background: string | null;
+  isDark: boolean;
 }

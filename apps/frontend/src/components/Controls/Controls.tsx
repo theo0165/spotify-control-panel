@@ -14,7 +14,14 @@ import ShuffleIcon from '../icons/ShuffleIcon';
 import * as S from './Controls.styles';
 import { ControlsProps } from './Controls.types';
 
-const Controls: FC<ControlsProps> = ({ duration, progress, isPlaying, isShuffle, isRepeat }) => {
+const Controls: FC<ControlsProps> = ({
+  duration,
+  progress,
+  isPlaying,
+  isShuffle,
+  isRepeat,
+  background,
+}) => {
   const dispatch = useAppDispatch();
   const [selectedIndex, setSelectedIndex] = useState(2);
   const currentPage = useAppSelector(state => state.application.currentModule);
@@ -114,7 +121,7 @@ const Controls: FC<ControlsProps> = ({ duration, progress, isPlaying, isShuffle,
   }, [currentPage]);
 
   return (
-    <S.Wrapper>
+    <S.Wrapper background={background}>
       <S.Timeline>
         <S.TimelineInner width={progress / duration} />
       </S.Timeline>

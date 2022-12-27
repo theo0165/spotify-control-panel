@@ -1,10 +1,12 @@
 import { translateTime } from '@scp/utils';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import Controls from '../../components/Controls';
 import SongLoading from '../../components/loading/SongLoading';
 import TextStyles from '../../components/TextStyles';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import useAverageColor from '../../hooks/useAverageColor';
+import { stateShouldUpdate } from '../../store/slices/playstateSlice';
 import * as S from './Player.style';
 import { PlayerProps } from './Player.types';
 
@@ -16,6 +18,8 @@ const Player: FC<PlayerProps> = ({ isActive }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isShuffle, setIsShuffle] = useState(false);
   const [isRepeat, setIsRepeat] = useState(true);
+  const imageRef = useRef<HTMLImageElement | null>(null);
+  const [color, isDark] = useAverageColor(imageRef?.current, playState);
 
   useEffect(() => {
     setDuration(playState.duration);
@@ -29,6 +33,10 @@ const Player: FC<PlayerProps> = ({ isActive }) => {
       if (isPlaying) {
         setProgress(prog => prog + 1000);
       }
+
+      if (progress >= duration) {
+        dispatch(stateShouldUpdate(true));
+      }
     }, 1000);
 
     return () => {
@@ -38,13 +46,14 @@ const Player: FC<PlayerProps> = ({ isActive }) => {
   }, [playState, isPlaying, isShuffle, duration, isRepeat]);
 
   return (
-    <S.Wrapper isActive={isActive}>
+    <S.Wrapper isActive={isActive} background={color} isDark={isDark}>
       {!playState.song.name || !playState.song.id ? (
         <SongLoading />
       ) : (
         <>
           <S.Artwork>
             <img
+              ref={imageRef}
               src={playState.song.image ?? 'https://via.placeholder.com/350'}
               alt={
                 playState.song.name
@@ -74,6 +83,7 @@ const Player: FC<PlayerProps> = ({ isActive }) => {
           isPlaying={isPlaying}
           isShuffle={isShuffle}
           isRepeat={isRepeat}
+          background={color}
         />
       </S.BottomContent>
     </S.Wrapper>
