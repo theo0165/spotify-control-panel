@@ -1,0 +1,22 @@
+{
+  "name": "@scp/wrapper",
+  "version": "0.0.1",
+  "description": "Electron wrapper for SCP",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "lint": "eslint .",
+    "start": "electron ./dist/src/index.js"
+  },
+  "dependencies": {
+    "@scp/eslint-config-config-scp": "*",
+    "@scp/tsconfig": "*",
+    "@scp/types": "*",
+    "typescript": "^4.9.4",
+    "electron": "^22.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.17"
+  }
+}

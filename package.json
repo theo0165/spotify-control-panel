@@ -6,6 +6,8 @@
   "license": "MIT",
   "private": "true",
   "scripts": {
+    "wrapper:start": "env-cmd -f .env yarn workspace @scp/wrapper build && env-cmd -f .env yarn workspace @scp/wrapper start",
+    "wrapper:lint": "yarn workspace @scp/wrapper lint",
     "backend:start": "env-cmd -f .env yarn workspace @scp/backend start",
     "backend:lint": "yarn workspace @scp/backend lint",
     "frontend:start": "env-cmd -f .env yarn workspace @scp/frontend start",
