@@ -45,7 +45,19 @@ const Controls: FC<ControlsProps> = ({ duration, progress, isPlaying, isShuffle,
     dispatch(stateShouldUpdate(true));
   };
 
-  const handleToggleShuffle = () => {};
+  const handleToggleShuffle = async () => {
+    await fetchWithCredentials(urlBuilder('/music/shuffle'), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        state: !isShuffle,
+      }),
+    });
+
+    dispatch(stateShouldUpdate(true));
+  };
 
   const handleToggleRepeat = () => {};
 
