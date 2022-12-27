@@ -2,7 +2,7 @@ import { fetchWithCredentials } from '../fetchWithCredentials';
 import { urlBuilder } from '../urlBuilder';
 
 export const startPlaying = async (playlist: string, device: string) => {
-  const playRequest = await fetchWithCredentials(urlBuilder('/music/play'), {
+  const playRequest = await fetchWithCredentials(urlBuilder('/music/start'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -35,7 +35,8 @@ const Player: FC<PlayerProps> = ({ isActive }) => {
       clearInterval(timer);
       setProgress(0);
     };
-  }, [playState]);
+  }, [playState, isPlaying, isShuffle, duration, progress, isRepeat]);
+
   return (
     <S.Wrapper isActive={isActive}>
       {!playState.song.name || !playState.song.id ? (

@@ -6,7 +6,7 @@ const PauseController: Controller = async (req, res) => {
     return res.status(401).json({ error: 'No user' });
   }
 
-  const pauseRequest = await fetch(spotifyUrlBuilder('/me/player/play'), {
+  const pauseRequest = await fetch(spotifyUrlBuilder('/me/player/pause'), {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -15,8 +15,6 @@ const PauseController: Controller = async (req, res) => {
   });
 
   if (!pauseRequest.ok) {
-    console.log(await pauseRequest.json());
-
     return res.status(pauseRequest.status).json({ error: 'Could not pause' });
   }
 

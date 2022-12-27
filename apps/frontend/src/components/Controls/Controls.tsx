@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import useEventConsumer from '../../hooks/useEventConsumer';
 import { setEvent } from '../../store/slices/eventSlice';
+import { stateShouldUpdate } from '../../store/slices/playstateSlice';
 import BackwardIcon from '../icons/BackwardIcon';
 import ForwardIcon from '../icons/ForwardIcon';
 import PauseIcon from '../icons/PauseIcon';
@@ -21,16 +22,28 @@ const Controls: FC<ControlsProps> = ({ duration, progress, isPlaying, isShuffle,
   const devices = useAppSelector(state => state.devices);
 
   const handlePlayPause = async () => {
-    const pauseRequest = await fetchWithCredentials(urlBuilder('/music/pause'), {
+    await fetchWithCredentials(urlBuilder(`/music/${isPlaying ? 'pause' : 'play'}`), {
       method: 'POST',
     });
 
-    console.log(pauseRequest.status);
+    dispatch(stateShouldUpdate(true));
   };
 
-  const handleNext = () => {};
+  const handleNext = async () => {
+    await fetchWithCredentials(urlBuilder('/music/next'), {
+      method: 'POST',
+    });
 
-  const handlePrev = () => {};
+    dispatch(stateShouldUpdate(true));
+  };
+
+  const handlePrev = async () => {
+    await fetchWithCredentials(urlBuilder('/music/previous'), {
+      method: 'POST',
+    });
+
+    dispatch(stateShouldUpdate(true));
+  };
 
   const handleToggleShuffle = () => {};
 
