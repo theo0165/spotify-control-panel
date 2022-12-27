@@ -34,8 +34,8 @@ const PlayStateController: Controller = async (req, res) => {
     item,
     is_playing: isPlaying,
   } = playState as ApiCurrentState;
-  const { artists, duration_ms: duration, id, name, album } = item;
-  const { images } = album;
+
+  console.log({ playState });
 
   let contextData = null;
 
@@ -56,6 +56,26 @@ const PlayStateController: Controller = async (req, res) => {
       };
     }
   }
+
+  if (!item) {
+    return res.json({
+      shuffle: playState.shuffle_state,
+      repeat: playState.repeat_state,
+      progress,
+      duration: 0,
+      isPlaying,
+      song: {
+        name: null,
+        id: null,
+        image: null,
+      },
+      artists: [],
+      context: contextData || context?.uri,
+    });
+  }
+
+  const { artists, duration_ms: duration, id, name, album } = item;
+  const { images } = album;
 
   return res.json({
     shuffle: playState.shuffle_state,

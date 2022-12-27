@@ -45,7 +45,11 @@ export const ContentControls = styled.div`
   column-gap: 32px;
 `;
 
-export const Repeat = styled.div<ShuffleRepeatProps>`
+const ControlItemBase = styled.div`
+  transition: all 0.2s ease-in-out;
+`;
+
+export const Repeat = styled(ControlItemBase)<ShuffleRepeatProps>`
   stroke: ${({ isActive, theme }) => (isActive ? theme.colors.green : theme.colors.white)};
   padding: 9px 10px 9px 10px;
   border-radius: 100%;
@@ -57,7 +61,7 @@ export const Repeat = styled.div<ShuffleRepeatProps>`
     `}
 `;
 
-export const Shuffle = styled.div<ShuffleRepeatProps>`
+export const Shuffle = styled(ControlItemBase)<ShuffleRepeatProps>`
   stroke: ${({ isActive, theme }) => (isActive ? theme.colors.green : theme.colors.white)};
   padding: 9px 10px 9px 10px;
   border-radius: 100%;
@@ -69,7 +73,7 @@ export const Shuffle = styled.div<ShuffleRepeatProps>`
     `}
 `;
 
-export const Backward = styled.div<ContentControlProps>`
+export const Backward = styled(ControlItemBase)<ContentControlProps>`
   padding: 12px 14px 12px 12px;
   border-radius: 100%;
 
@@ -80,7 +84,7 @@ export const Backward = styled.div<ContentControlProps>`
     `}
 `;
 
-export const PlayPause = styled.div<PlayPauseProps>`
+export const PlayPause = styled(ControlItemBase)<PlayPauseProps>`
   padding: ${({ isPlay }) => (isPlay ? '12px 13px 12px 13px' : '12px 10px 12px 16px')};
   border-radius: 100%;
 
@@ -91,7 +95,7 @@ export const PlayPause = styled.div<PlayPauseProps>`
     `}
 `;
 
-export const Forward = styled.div<ContentControlProps>`
+export const Forward = styled(ControlItemBase)<ContentControlProps>`
   padding: 12px 12px 12px 14px;
   border-radius: 100%;
 

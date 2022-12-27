@@ -24,7 +24,7 @@ const Playlists: FC = () => {
   const startPlaylist = async () => {
     if (selectedIndex <= 0) return;
 
-    const shouldPlay = userPlaylists[selectedIndex];
+    const shouldPlay = userPlaylists[selectedIndex - 1];
     // TODO: Change to currently selected device
     const couldStartPlaying = await startPlaying(
       `spotify:playlist:${shouldPlay.id}`,

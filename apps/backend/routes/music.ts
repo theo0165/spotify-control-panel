@@ -5,6 +5,7 @@ import PlayController from '../controllers/music/PlayController';
 import PlayStateController from '../controllers/music/PlayStateController';
 import PreviousController from '../controllers/music/PreviousController';
 import StartController from '../controllers/music/StartController';
+import ToggleRepeatController from '../controllers/music/ToggleRepeatController';
 import ToggleShuffleController from '../controllers/music/ToggleShuffleController';
 
 const router = Router();
@@ -16,5 +17,6 @@ router.get('/state', PlayStateController);
 router.post('/next', NextController);
 router.post('/previous', PreviousController);
 router.post('/shuffle', ToggleShuffleController);
+router.post('/repeat', ToggleRepeatController);
 
 export default router;

@@ -35,7 +35,7 @@ const Player: FC<PlayerProps> = ({ isActive }) => {
       clearInterval(timer);
       setProgress(0);
     };
-  }, [playState, isPlaying, isShuffle, duration, progress, isRepeat]);
+  }, [playState, isPlaying, isShuffle, duration, isRepeat]);
 
   return (
     <S.Wrapper isActive={isActive}>

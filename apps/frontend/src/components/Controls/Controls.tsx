@@ -59,7 +59,19 @@ const Controls: FC<ControlsProps> = ({ duration, progress, isPlaying, isShuffle,
     dispatch(stateShouldUpdate(true));
   };
 
-  const handleToggleRepeat = () => {};
+  const handleToggleRepeat = async () => {
+    await fetchWithCredentials(urlBuilder('/music/repeat'), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        state: !isRepeat,
+      }),
+    });
+
+    dispatch(stateShouldUpdate(true));
+  };
 
   useEffect(() => {
     if (!eventsActive) return;
@@ -96,6 +108,10 @@ const Controls: FC<ControlsProps> = ({ duration, progress, isPlaying, isShuffle,
       dispatch(setEvent({ name: 'left', value: false }));
     }
   }, [selectedIndex, currentPage, events, eventsActive]);
+
+  useEffect(() => {
+    setSelectedIndex(2);
+  }, [currentPage]);
 
   return (
     <S.Wrapper>
