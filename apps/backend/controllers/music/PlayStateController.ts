@@ -35,8 +35,6 @@ const PlayStateController: Controller = async (req, res) => {
     is_playing: isPlaying,
   } = playState as ApiCurrentState;
 
-  console.log({ playState });
-
   let contextData = null;
 
   if (context?.href) {

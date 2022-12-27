@@ -22,8 +22,6 @@ const ToggleShuffleController: Controller = async (req, res) => {
   );
 
   if (!shuffleRequest.ok) {
-    console.log(await shuffleRequest.json());
-
     return res.status(shuffleRequest.status).json({ error: 'Could not toggle shuffle' });
   }
 

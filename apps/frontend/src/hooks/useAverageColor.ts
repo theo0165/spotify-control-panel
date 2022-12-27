@@ -14,8 +14,6 @@ const useAverageColor = (
     if (!newImage) return;
 
     new FastAverageColor().getColorAsync(newImage).then(c => {
-      console.log({ c });
-
       setColor(c.rgba);
       setIsDark(c.isDark);
     });

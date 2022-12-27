@@ -22,8 +22,6 @@ const ToggleRepeatController: Controller = async (req, res) => {
   );
 
   if (!repeatRequest.ok) {
-    console.log(await repeatRequest.json());
-
     return res.status(repeatRequest.status).json({ error: 'Could not toggle shuffle' });
   }
 
