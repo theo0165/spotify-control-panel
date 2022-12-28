@@ -18,6 +18,7 @@ declare global {
       SPOTIFY_CLIENT_ID: string;
       SPOTIFY_CLIENT_SECRET: string;
       SPOTIFY_REDIRECT_URI: string;
+      SPOTIFY_QR_REDIRECT_URI: string;
       REACT_APP_SERVER_BASE_URL: string;
       CORS_ALLOW: string;
     }
