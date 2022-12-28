@@ -15,3 +15,9 @@ model application {
   name String
   value String
 }
+
+model qrToken {
+  id Int @id @default(autoincrement())
+  sessionId String
+  token String
+}

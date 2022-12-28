@@ -18,8 +18,6 @@ const socket = Socket.getInstance(httpServer);
 
 socket.on('connection', client => {
   console.log('user connect', client.id);
-
-  // userInteraction(client, socket);
 });
 
 app.use(
@@ -36,8 +34,8 @@ app.use(
   session({
     name: process.env.SESSION_COOKIE_NAME,
     secret: process.env.SESSION_SECRET,
-    saveUninitialized: false,
-    resave: false,
+    saveUninitialized: true,
+    resave: true,
     cookie: {
       maxAge: new Date(253402300000000).valueOf(),
     },
