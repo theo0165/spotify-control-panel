@@ -18,6 +18,8 @@ jobs:
       - name: Add ENV
         run: |
           echo "${{ secrets.BUILD_ENV }}" > .env
+          ls -la
+          cat .env
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
