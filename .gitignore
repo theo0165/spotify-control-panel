@@ -5,3 +5,5 @@ yarn-error.log
 *.log
 dist
 tsconfig.tsbuildinfo
+*.db
+*.db-journal
