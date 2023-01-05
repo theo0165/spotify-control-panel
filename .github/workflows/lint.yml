@@ -1,0 +1,29 @@
+name: Project lint
+
+jobs:
+  lint:
+    name: Project lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 19.0.0
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Backend
+        run: yarn backend:lint
+
+      - name: Frontend
+        run: yarn frontend:lint
+
+      - name: Utils
+        run: yarn utils:lint
+
+      - name: Wrapper
+        run: yarn wrapper:lint
