@@ -1,0 +1,87 @@
+volumes:
+  db_data:
+  redis:
+
+networks:
+  scp:
+
+services:
+  # db:
+  #   container_name: db
+  #   image: postgres
+  #   environment:
+  #     - POSTGRES_PASSWORD=password
+  #     - POSTGRES_USER=root
+  #   ports:
+  #     - 5432:5432
+  #   volumes:
+  #     - db_data:/var/lib/postgresql/data
+  #   networks:
+  #     - scp
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - 6379:6379
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - redis:/data
+    networks:
+      - scp
+  app:
+    container_name: app
+    build:
+      context: .
+    ports:
+      - 3001:3001
+      - 3000:3000
+    depends_on:
+      - 'redis'
+    networks:
+      - scp
+# services:
+#   db:
+#     container_name: db
+#     image: postgres
+#     environment:
+#       - POSTGRES_PASSWORD=password
+#       - POSTGRES_USER=root
+#     ports:
+#       - 5432:5432
+#     volumes:
+#       - db_data:/var/lib/postgresql/data
+#     networks:
+#       - scp
+#   redis:
+#     container_name: prod-redis
+#     image: redis
+#     ports:
+#       - 6379:6379
+#     command: redis-server --save 20 1 --loglevel warning
+#     volumes:
+#       - redis:/data
+#     networks:
+#       - scp
+#   be:
+#     container_name: prod-be
+#     build:
+#       context: .
+#       dockerfile: docker/backend.dockerfile
+#     ports:
+#       - 3001:3001
+#     depends_on:
+#       - db
+#       - redis
+#     networks:
+#       - scp
+#   fe:
+#     container_name: prod-fe
+#     build:
+#       context: .
+#       dockerfile: docker/frontend.dockerfile
+#     ports:
+#       - 3000:3000
+#     depends_on:
+#       - be
+#     networks:
+#       - scp

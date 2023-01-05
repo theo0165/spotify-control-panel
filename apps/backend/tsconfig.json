@@ -1,6 +1,7 @@
 {
   "extends": "@scp/tsconfig/express.json",
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "index.ts"],
+  "exclude": ["dist"],
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "dist"

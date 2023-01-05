@@ -15,6 +15,7 @@ declare global {
       SESSION_SECRET: string;
       SESSION_COOKIE_NAME: string;
       REDIS_PORT: string;
+      REDIS_HOST: string;
       SPOTIFY_CLIENT_ID: string;
       SPOTIFY_CLIENT_SECRET: string;
       SPOTIFY_REDIRECT_URI: string;

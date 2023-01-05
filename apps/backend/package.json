@@ -5,10 +5,14 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "nodemon index.ts",
+    "dev": "nodemon index.ts",
     "lint": "eslint .",
     "migrate": "prisma migrate",
-    "seed": "prisma db seed"
+    "generate": "prisma generate",
+    "seed": "prisma db seed",
+    "build": "tsc --project tsconfig.json",
+    "start": "node dist/index.js",
+    "db:deploy": "prisma migrate deploy && prisma generate && prisma db seed"
   },
   "prisma": {
     "seed": "ts-node --transpile-only prisma/seed.ts"

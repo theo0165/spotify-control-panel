@@ -9,17 +9,18 @@ const prisma = new PrismaClient();
 const main = async () => {
   await prisma.application.deleteMany();
 
-  await prisma.application.createMany({
-    data: [
-      {
-        name: 'name',
-        value: 'Controller for Spotify',
-      },
-      {
-        name: 'version',
-        value: app.version,
-      },
-    ],
+  await prisma.application.create({
+    data: {
+      name: 'name',
+      value: 'Controller for Spotify',
+    },
+  });
+
+  await prisma.application.create({
+    data: {
+      name: 'version',
+      value: app.version,
+    },
   });
 };
 
