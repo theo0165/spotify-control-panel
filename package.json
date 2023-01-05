@@ -10,7 +10,7 @@
     "wrapper:lint": "yarn workspace @scp/wrapper lint",
     "backend:dev": "env-cmd -f .env yarn workspace @scp/backend dev",
     "backend:lint": "yarn workspace @scp/backend lint",
-    "backend:build": "env-cmd -f .env yarn workspace @scp/backend db:deploy && env-cmd -f .env yarn workspace @scp/backend build",
+    "backend:build": "env-cmd -f .env yarn utils:build && env-cmd -f .env yarn workspace @scp/backend db:deploy && env-cmd -f .env yarn workspace @scp/backend build",
     "frontend:dev": "env-cmd -f .env yarn workspace @scp/frontend dev",
     "frontend:lint": "yarn workspace @scp/frontend lint",
     "frontend:build": "env-cmd -f .env yarn workspace @scp/frontend build",
