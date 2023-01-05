@@ -16,12 +16,12 @@
     "frontend:build": "env-cmd -f .env yarn workspace @scp/frontend build",
     "utils:dev": "env-cmd -f .env yarn workspace @scp/utils dev",
     "utils:lint": "yarn workspace @scp/utils lint",
-    "start": "concurrently \"yarn utils:start\" \"yarn backend:start\" \"yarn frontend:start\"",
     "utils:build": "yarn workspace @scp/utils build",
     "dev": "concurrently \"yarn utils:dev\" \"yarn backend:dev\" \"yarn frontend:dev\"",
     "lint": "yarn frontend:lint && yarn backend:lint && yarn utils:lint",
     "migrate": "env-cmd -f .env yarn workspace @scp/backend migrate",
     "seed": "env-cmd -f .env yarn workspace @scp/backend seed",
+    "start": "concurrently \"env-cmd -f .env serve apps/frontend/build\" \"env-cmd -f .env node apps/backend/dist/index.js\""
   },
   "dependencies": {},
   "devDependencies": {
