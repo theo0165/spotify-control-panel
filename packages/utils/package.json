@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "start": "tsc --watch",
+    "dev": "tsc --watch",
     "lint": "eslint ."
   },
   "dependencies": {
