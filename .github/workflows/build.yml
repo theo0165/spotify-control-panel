@@ -1,5 +1,7 @@
 name: Project build
 
+on: push
+
 jobs:
   build:
     name: Project build

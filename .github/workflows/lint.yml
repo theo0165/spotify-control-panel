@@ -1,5 +1,7 @@
 name: Project lint
 
+on: push
+
 jobs:
   lint:
     name: Project lint
