@@ -1,20 +1,28 @@
 import { Controller } from '@scp/types';
-import { v4 as uuidv4 } from 'uuid';
 import SpotifyScope from '../../../constants/SpotifyScope';
+import prisma from '../../../prisma/prisma';
 
-const LoginQrController: Controller = (req, res) => {
-  const state = uuidv4();
+const LoginQrController: Controller = async (req, res) => {
+  if (!req.query || !req.query.token) {
+    return res.status(400).send('Invalid token');
+  }
 
-  req.session.state = state;
-  req.session.save();
+  const qrToken = await prisma.qrToken.findFirst({ where: { token: req.query.token.toString() } });
+
+  if (!qrToken) {
+    return res.status(400).send('Invalid token');
+  }
 
   const params = new URLSearchParams({
     response_type: 'code',
     client_id: process.env.SPOTIFY_CLIENT_ID,
     scope: SpotifyScope,
     redirect_uri: process.env.SPOTIFY_QR_REDIRECT_URI,
-    state,
+    state: qrToken.token,
   });
+
+  req.session.state = qrToken.token;
+  req.session.save();
 
   return res.redirect(`https://accounts.spotify.com/authorize?${params.toString()}`);
 };

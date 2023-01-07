@@ -8,6 +8,6 @@ CREATE TABLE "application" (
 -- CreateTable
 CREATE TABLE "qrToken" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "sessionId" TEXT NOT NULL,
+    "socketId" TEXT NOT NULL,
     "token" TEXT NOT NULL
 );

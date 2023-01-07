@@ -20,6 +20,7 @@
     "dev": "concurrently \"yarn utils:dev\" \"yarn backend:dev\" \"yarn frontend:dev\"",
     "lint": "yarn frontend:lint && yarn backend:lint && yarn utils:lint",
     "migrate": "env-cmd -f .env yarn workspace @scp/backend migrate",
+    "generate": "yarn workspace @scp/backend generate",
     "seed": "env-cmd -f .env yarn workspace @scp/backend seed",
     "start": "concurrently \"env-cmd -f .env serve apps/frontend/build\" \"env-cmd -f .env node apps/backend/dist/index.js\""
   },

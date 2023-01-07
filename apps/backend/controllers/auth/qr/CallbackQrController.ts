@@ -1,6 +1,7 @@
 import { ApiUser, Controller } from '@scp/types';
 import { getAuthToken, getSpofityData, isError } from '@scp/utils';
 import Socket from '../../../lib/socket';
+import prisma from '../../../prisma/prisma';
 
 const CallbackQrController: Controller = async (req, res) => {
   const { code, state } = req.query;
@@ -9,17 +10,19 @@ const CallbackQrController: Controller = async (req, res) => {
     return res.status(400).json({ error: 'Invalid callback', code: 400 });
   }
 
-  if (state !== req.session.state) {
-    return res.status(400).json({ error: 'State mismatch', code: 400 });
-  }
-
   if (code.toString().length < 1) {
     return res.status(400).json({ error: 'Invalid auth code', code: 400 });
   }
 
+  const qrToken = await prisma.qrToken.findFirst({ where: { token: req.session.state } });
+
+  if (!qrToken) {
+    return res.status(400).send('Invalid token');
+  }
+
   const bodyData = new URLSearchParams({
     code: code.toString(),
-    redirect_uri: process.env.SPOTIFY_REDIRECT_URI,
+    redirect_uri: process.env.SPOTIFY_QR_REDIRECT_URI,
     grant_type: 'authorization_code',
   });
 
@@ -55,13 +58,14 @@ const CallbackQrController: Controller = async (req, res) => {
   };
 
   req.session.token = token;
-
   req.session.save();
 
   const userRequest = await getSpofityData<ApiUser>('/me', req);
 
   if (!userRequest) return res.json({ error: 'Something went wrong' });
-  if (isError(userRequest)) return res.json({ error: userRequest.error });
+  if (isError(userRequest)) {
+    return res.json({ error: userRequest.error });
+  }
 
   const user = {
     name: userRequest.display_name,
@@ -70,7 +74,6 @@ const CallbackQrController: Controller = async (req, res) => {
   };
 
   req.session.user = user;
-
   req.session.save();
 
   const socket = Socket.getInstance();
